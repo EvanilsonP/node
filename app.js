@@ -1,9 +1,14 @@
 const express = require('express');
+const morgan = require('morgan');
 const app = express();
 const port = 3000;
 
 // register view engine
 app.set('view engine', 'ejs');
+app.use(morgan('dev'));
+
+// middleware & static files
+app.use(express.static('public'));
 
 app.get('/', (req, res) => {
     const blogs = [
