@@ -1,0 +1,26 @@
+{
+  "dependencies": {
+    "nodemon": "^2.0.20"
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "name": "mongo",
+  "version": "1.0.0",
+  "main": "files.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EvanilsonP/node-mongo.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EvanilsonP/node-mongo/issues"
+  },
+  "homepage": "https://github.com/EvanilsonP/node-mongo#readme",
+  "description": ""
+}
