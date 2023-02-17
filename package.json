@@ -5,7 +5,7 @@
     "nodemon": "^2.0.20"
   },
   "scripts": {
-    "start": "npx nodemon server.js"
+    "start": "npx nodemon app.js"
   },
   "name": "mongo",
   "version": "1.0.0",
