@@ -1,29 +1,15 @@
 const express = require('express');
-
-// express app
 const app = express();
+const mongoose = require('mongoose');
 
-// listen for requests
-app.listen(3000);
+const dbURI = 'mongodb+srv://88813091a:88813091a@cluster0.rq4v2yp.mongodb.net/node-tuts?retryWrites=true&w=majority';
 
-// register view engine
+mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(result => console.log('connected to db'))
+  .catch(err => console.log(err));
+
 app.set('view engine', 'ejs');
-
-// middleware & static files
 app.use(express.static('public'));
-
-app.use((req, res, next) => {
-  console.log('new request made:');
-  console.log('host: ', req.hostname);
-  console.log('path: ', req.path);
-  console.log('method: ', req.method);
-  next();
-});
-
-app.use((req, res, next) => {
-  res.locals.path = req.path;
-  next();
-});
 
 app.get('/', (req, res) => {
   const blogs = [
@@ -46,3 +32,5 @@ app.get('/blogs/create', (req, res) => {
 app.use((req, res) => {
   res.status(404).render('404', { title: '404' });
 });
+
+app.listen(3000, () => console.log('Server running on port 3000'));
