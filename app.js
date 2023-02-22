@@ -5,8 +5,9 @@ const mongoose = require('mongoose');
 const dbURI = 'mongodb+srv://88813091a:88813091a@cluster0.rq4v2yp.mongodb.net/node-tuts?retryWrites=true&w=majority';
 
 mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(result => console.log('connected to db'))
-  .catch(err => console.log(err));
+// listening for requests after the connection to database is completed
+  .then(result => app.listen(3000))
+  .catch(err => console.log(err))
 
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
@@ -32,5 +33,3 @@ app.get('/blogs/create', (req, res) => {
 app.use((req, res) => {
   res.status(404).render('404', { title: '404' });
 });
-
-app.listen(3000, () => console.log('Server running on port 3000'));
