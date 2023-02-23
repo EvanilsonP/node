@@ -12,6 +12,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
 
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
+app.use(express.urlencoded({extended: true})); // shows a object-like in the terminal
 
 app.get('/', (req, res) => {
   res.redirect('/blogs');
@@ -23,7 +24,7 @@ app.get('/about', (req, res) => {
 
 // blog routes
 app.get('/blogs', (req, res) => {
-  Blog.find()
+  Blog.find().sort({ createdAt: -1 })
   .then((result) => {
     res.render('index', { title: 'All blogs ', blogs: result });
   })
@@ -34,6 +35,19 @@ app.get('/blogs', (req, res) => {
 
 app.get('/blogs/create', (req, res) => {
   res.render('create', { title: 'Create a new blog' });
+});
+
+app.post('/blogs', (req, res) => {
+  const blog = new Blog(req.body);
+  blog.save()
+
+  .then((result) => {
+    res.redirect('/blogs');
+  })
+  .catch((err) => {
+    console.log(err);
+  })
+
 });
 
 // 404 page
